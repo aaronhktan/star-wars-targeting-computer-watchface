@@ -1,0 +1,84 @@
+{
+    "author": "cheeseisdisgusting@gmail.com",
+    "dependencies": {},
+    "keywords": [],
+    "name": "star-wars-targeting-computer",
+    "pebble": {
+        "capabilities": [
+            "health"
+        ],
+        "displayName": "Star Wars Targeting Computer",
+        "enableMultiJS": true,
+        "messageKeys": [],
+        "projectType": "native",
+        "resources": {
+            "media": [
+                {
+                    "file": "images/icon.png",
+                    "menuIcon": true,
+                    "name": "MENU_ICON",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
+                    "characterRegex": "[0-9:]",
+                    "file": "fonts/stencil.ttf",
+                    "name": "FONT_STENCIL_30",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "diorite"
+                    ],
+                    "type": "font"
+                },
+                {
+                    "characterRegex": "[0-9]",
+                    "file": "fonts/stencil.ttf",
+                    "name": "FONT_STENCIL_16",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "diorite"
+                    ],
+                    "type": "font"
+                },
+                {
+                    "characterRegex": "[-0-9%CHG]",
+                    "file": "fonts/stencil.ttf",
+                    "name": "FONT_STENCIL_12",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "diorite"
+                    ],
+                    "type": "font"
+                },
+                {
+                    "file": "images/background.png",
+                    "name": "BACKGROUND_IMAGE",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                }
+            ]
+        },
+        "sdkVersion": "3",
+        "targetPlatforms": [
+            "aplite",
+            "basalt",
+            "diorite"
+        ],
+        "uuid": "133ed774-bcb2-4076-9c54-ec816dbe94a8",
+        "watchapp": {
+            "watchface": true
+        }
+    },
+    "version": "1.0.0"
+}
