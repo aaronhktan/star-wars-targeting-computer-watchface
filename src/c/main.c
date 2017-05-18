@@ -12,18 +12,18 @@ static void foreground_update_proc(Layer *s_foreground_layer, GContext *ctx) {
 	
 	graphics_context_set_text_color(ctx, PBL_IF_COLOR_ELSE(GColorWhite, GColorBlack));
 	
-	GSize time_text_bounds = graphics_text_layout_get_content_size("10:10", s_stencil_font_large, GRect(0, 0, bounds.size.w, bounds.size.h), GTextOverflowModeWordWrap, GTextAlignmentCenter);
-	graphics_draw_text(ctx, "10:10", s_stencil_font_large, GRect(92 - 0.5 * time_text_bounds.w, 10, time_text_bounds.w, time_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentCenter, NULL);
+	GSize time_text_bounds = graphics_text_layout_get_content_size(s_time_text, s_stencil_font_large, GRect(0, 0, bounds.size.w, bounds.size.h), GTextOverflowModeWordWrap, GTextAlignmentCenter);
+	graphics_draw_text(ctx, s_time_text, s_stencil_font_large, GRect(92 - 0.5 * time_text_bounds.w, 10, time_text_bounds.w, time_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentCenter, NULL);
 
-	GSize date_text_bounds = graphics_text_layout_get_content_size("1977-05-25", s_stencil_font_tiny, GRect(0, 0, bounds.size.w, bounds.size.h), GTextOverflowModeWordWrap, GTextAlignmentCenter);
-	graphics_draw_text(ctx, "1977-05-25", s_stencil_font_tiny, GRect(92 - 0.5 * date_text_bounds.w, 41, date_text_bounds.w, date_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentCenter, NULL);
+	GSize date_text_bounds = graphics_text_layout_get_content_size(s_date_text, s_stencil_font_tiny, GRect(0, 0, bounds.size.w, bounds.size.h), GTextOverflowModeWordWrap, GTextAlignmentCenter);
+	graphics_draw_text(ctx, s_date_text, s_stencil_font_tiny, GRect(92 - 0.5 * date_text_bounds.w, 41, date_text_bounds.w, date_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentCenter, NULL);
 	
-	GSize battery_text_bounds = graphics_text_layout_get_content_size("100", s_stencil_font_tiny, GRect(0, 0, bounds.size.w, bounds.size.h), GTextOverflowModeWordWrap, GTextAlignmentRight);
-	graphics_draw_text(ctx, "100" , s_stencil_font_tiny, GRect(113 - battery_text_bounds.w, 2, battery_text_bounds.w, battery_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentRight, NULL);
+	GSize battery_text_bounds = graphics_text_layout_get_content_size(s_battery_text, s_stencil_font_tiny, GRect(0, 0, bounds.size.w, bounds.size.h), GTextOverflowModeWordWrap, GTextAlignmentRight);
+	graphics_draw_text(ctx, s_battery_text, s_stencil_font_tiny, GRect(113 - battery_text_bounds.w, 2, battery_text_bounds.w, battery_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentRight, NULL);
 	
 	graphics_context_set_text_color(ctx, PBL_IF_COLOR_ELSE(GColorOrange, GColorWhite));
 	GSize step_text_bounds = graphics_text_layout_get_content_size(s_steps_text, s_stencil_font_small, GRect(0, 0, bounds.size.w, bounds.size.h), GTextOverflowModeWordWrap, GTextAlignmentCenter);
-	graphics_draw_text(ctx, "001138", s_stencil_font_small, GRect(72 - 0.5 * step_text_bounds.w, 147, step_text_bounds.w, step_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentCenter, NULL);
+	graphics_draw_text(ctx, s_steps_text, s_stencil_font_small, GRect(72 - 0.5 * step_text_bounds.w, 147, step_text_bounds.w, step_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentCenter, NULL);
 }
 
 static void update_ui() {
@@ -74,8 +74,11 @@ static void initialize_ui() {
 static void main_window_load(Window *window) {
 	s_window_layer = window_get_root_layer(window);
 	initialize_ui();
-	update_ui();
 	battery_handler();
+	#if defined(PBL_HEALTH)
+	health_handler(HealthMetricStepCount, NULL);
+	#endif	
+	update_ui();
 }
 
 static void main_window_unload(Window *window) {
@@ -100,13 +103,13 @@ static void init() {
 	s_stencil_font_small = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_STENCIL_16));
 	s_stencil_font_tiny = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_STENCIL_12));
 	
-	window_stack_push(s_main_window, true);
-	
 	tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
 	battery_state_service_subscribe(battery_handler);
 	#if defined(PBL_HEALTH)
 	health_service_events_subscribe(health_handler, NULL);
 	#endif
+	
+	window_stack_push(s_main_window, true);
 }
 
 static void deinit() {
