@@ -12,19 +12,44 @@ static void foreground_update_proc(Layer *s_foreground_layer, GContext *ctx) {
 	
 	graphics_context_set_text_color(ctx, PBL_IF_COLOR_ELSE(GColorWhite, GColorBlack));
 	
+	#if PBL_RECT
 	GSize time_text_bounds = graphics_text_layout_get_content_size(s_time_text, s_stencil_font_large, GRect(0, 0, bounds.size.w, bounds.size.h), GTextOverflowModeWordWrap, GTextAlignmentCenter);
-	graphics_draw_text(ctx, s_time_text, s_stencil_font_large, GRect(92 - 0.5 * time_text_bounds.w, 10, time_text_bounds.w, time_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentCenter, NULL);
+	graphics_draw_text(ctx, s_time_text, s_stencil_font_large, GRect(92 - 0.5 * time_text_bounds.w, 25, time_text_bounds.w, time_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentCenter, NULL);
 
 	GSize date_text_bounds = graphics_text_layout_get_content_size(s_date_text, s_stencil_font_tiny, GRect(0, 0, bounds.size.w, bounds.size.h), GTextOverflowModeWordWrap, GTextAlignmentCenter);
 	graphics_draw_text(ctx, s_date_text, s_stencil_font_tiny, GRect(92 - 0.5 * date_text_bounds.w, 41, date_text_bounds.w, date_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentCenter, NULL);
 	
 	GSize battery_text_bounds = graphics_text_layout_get_content_size(s_battery_text, s_stencil_font_tiny, GRect(0, 0, bounds.size.w, bounds.size.h), GTextOverflowModeWordWrap, GTextAlignmentRight);
 	graphics_draw_text(ctx, s_battery_text, s_stencil_font_tiny, GRect(113 - battery_text_bounds.w, 2, battery_text_bounds.w, battery_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentRight, NULL);
+	#else
+	GSize time_text_bounds = graphics_text_layout_get_content_size(s_time_text, s_stencil_font_large, GRect(0, 0, bounds.size.w, bounds.size.h), GTextOverflowModeWordWrap, GTextAlignmentCenter);
+	graphics_draw_text(ctx, s_time_text, s_stencil_font_large, GRect(90 - 0.5 * time_text_bounds.w, 17, time_text_bounds.w, time_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentCenter, NULL);
+
+	GSize date_text_bounds = graphics_text_layout_get_content_size(s_date_text, s_stencil_font_tiny, GRect(0, 0, bounds.size.w, bounds.size.h), GTextOverflowModeWordWrap, GTextAlignmentCenter);
+	graphics_draw_text(ctx, s_date_text, s_stencil_font_tiny, GRect(90 - 0.5 * date_text_bounds.w, 47, date_text_bounds.w, date_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentCenter, NULL);
+	
+	GSize battery_text_bounds = graphics_text_layout_get_content_size(s_battery_text, s_stencil_font_tiny, GRect(0, 0, bounds.size.w, bounds.size.h), GTextOverflowModeWordWrap, GTextAlignmentRight);
+	graphics_draw_text(ctx, s_battery_text, s_stencil_font_tiny, GRect(90 - battery_text_bounds.w, 8, battery_text_bounds.w, battery_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentRight, NULL);	
+	#endif
+	
 	
 	graphics_context_set_text_color(ctx, PBL_IF_COLOR_ELSE(GColorOrange, GColorWhite));
+	
+	#if PBL_RECT
 	GSize step_text_bounds = graphics_text_layout_get_content_size(s_steps_text, s_stencil_font_small, GRect(0, 0, bounds.size.w, bounds.size.h), GTextOverflowModeWordWrap, GTextAlignmentCenter);
 	graphics_draw_text(ctx, s_steps_text, s_stencil_font_small, GRect(72 - 0.5 * step_text_bounds.w, 147, step_text_bounds.w, step_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentCenter, NULL);
+	#else
+	GSize step_text_bounds = graphics_text_layout_get_content_size(s_steps_text, s_stencil_font_small, GRect(0, 0, bounds.size.w, bounds.size.h), GTextOverflowModeWordWrap, GTextAlignmentCenter);
+	graphics_draw_text(ctx, s_steps_text, s_stencil_font_small, GRect(90 - 0.5 * step_text_bounds.w, 138, step_text_bounds.w, step_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentCenter, NULL);
+	#endif
 }
+
+#if defined(PBL_HEALTH)
+static void get_step_count() {
+	HealthValue value = health_service_sum_today(HealthMetricStepCount);
+	snprintf(s_steps_text, sizeof(s_steps_text), "%06d", (int)value);
+}
+#endif
 
 static void update_ui() {
 	time_t temp = time(NULL);
@@ -51,8 +76,7 @@ static void battery_handler() {
 
 #if defined(PBL_HEALTH)
 static void health_handler(HealthEventType event, void *context) {
-	HealthValue value = health_service_sum_today(HealthMetricStepCount);
-	snprintf(s_steps_text, sizeof(s_steps_text), "%06d", (int)value);
+	get_step_count();
 	layer_mark_dirty(s_foreground_layer);
 }
 #endif
@@ -76,8 +100,8 @@ static void main_window_load(Window *window) {
 	initialize_ui();
 	battery_handler();
 	#if defined(PBL_HEALTH)
-	health_handler(HealthMetricStepCount, NULL);
-	#endif	
+	get_step_count();
+	#endif
 	update_ui();
 }
 
