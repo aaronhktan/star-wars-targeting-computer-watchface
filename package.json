@@ -14,6 +14,259 @@
         "resources": {
             "media": [
                 {
+                    "file": "images/frame22.png",
+                    "name": "BACKGROUND_FRAME_22",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/frame09.png",
+                    "name": "BACKGROUND_FRAME_9",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/frame08.png",
+                    "name": "BACKGROUND_FRAME_8",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/frame07.png",
+                    "name": "BACKGROUND_FRAME_7",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/frame06.png",
+                    "name": "BACKGROUND_FRAME_6",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/frame05.png",
+                    "name": "BACKGROUND_FRAME_5",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/frame04.png",
+                    "name": "BACKGROUND_FRAME_4",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/frame03.png",
+                    "name": "BACKGROUND_FRAME_3",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/frame02.png",
+                    "name": "BACKGROUND_FRAME_2",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/frame01.png",
+                    "name": "BACKGROUND_FRAME_1",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/frame23.png",
+                    "name": "BACKGROUND_FRAME_23",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/frame21.png",
+                    "name": "BACKGROUND_FRAME_21",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/frame20.png",
+                    "name": "BACKGROUND_FRAME_20",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/frame19.png",
+                    "name": "BACKGROUND_FRAME_19",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/frame18.png",
+                    "name": "BACKGROUND_FRAME_18",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/frame17.png",
+                    "name": "BACKGROUND_FRAME_17",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/frame16.png",
+                    "name": "BACKGROUND_FRAME_16",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/frame15.png",
+                    "name": "BACKGROUND_FRAME_15",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/frame14.png",
+                    "name": "BACKGROUND_FRAME_14",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/frame13.png",
+                    "name": "BACKGROUND_FRAME_13",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/frame12.png",
+                    "name": "BACKGROUND_FRAME_12",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/frame11.png",
+                    "name": "BACKGROUND_FRAME_11",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/frame10.png",
+                    "name": "BACKGROUND_FRAME_10",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
                     "file": "images/icon.png",
                     "menuIcon": true,
                     "name": "MENU_ICON",
@@ -26,20 +279,9 @@
                     "type": "bitmap"
                 },
                 {
-                    "file": "images/background.png",
-                    "name": "BACKGROUND_IMAGE",
-                    "targetPlatforms": [
-                        "aplite",
-                        "basalt",
-                        "chalk",
-                        "diorite"
-                    ],
-                    "type": "bitmap"
-                },
-                {
-                    "characterRegex": "[0-9:]",
+                    "characterRegex": "[-0-9%CHG]",
                     "file": "fonts/stencil.ttf",
-                    "name": "FONT_STENCIL_30",
+                    "name": "FONT_STENCIL_12",
                     "targetPlatforms": [
                         "aplite",
                         "basalt",
@@ -61,9 +303,9 @@
                     "type": "font"
                 },
                 {
-                    "characterRegex": "[-0-9%CHG]",
+                    "characterRegex": "[0-9:]",
                     "file": "fonts/stencil.ttf",
-                    "name": "FONT_STENCIL_12",
+                    "name": "FONT_STENCIL_30",
                     "targetPlatforms": [
                         "aplite",
                         "basalt",
@@ -71,6 +313,17 @@
                         "diorite"
                     ],
                     "type": "font"
+                },
+                {
+                    "file": "images/background.png",
+                    "name": "BACKGROUND_IMAGE",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
                 }
             ]
         },
