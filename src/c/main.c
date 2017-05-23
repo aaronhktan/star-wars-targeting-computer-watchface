@@ -14,7 +14,7 @@ static void foreground_update_proc(Layer *s_foreground_layer, GContext *ctx) {
 	
 	#if PBL_RECT
 	GSize time_text_bounds = graphics_text_layout_get_content_size(s_time_text, s_stencil_font_large, GRect(0, 0, bounds.size.w, bounds.size.h), GTextOverflowModeWordWrap, GTextAlignmentCenter);
-	graphics_draw_text(ctx, s_time_text, s_stencil_font_large, GRect(92 - 0.5 * time_text_bounds.w, 25, time_text_bounds.w, time_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentCenter, NULL);
+	graphics_draw_text(ctx, s_time_text, s_stencil_font_large, GRect(92 - 0.5 * time_text_bounds.w, 10, time_text_bounds.w, time_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentCenter, NULL);
 
 	GSize date_text_bounds = graphics_text_layout_get_content_size(s_date_text, s_stencil_font_tiny, GRect(0, 0, bounds.size.w, bounds.size.h), GTextOverflowModeWordWrap, GTextAlignmentCenter);
 	graphics_draw_text(ctx, s_date_text, s_stencil_font_tiny, GRect(92 - 0.5 * date_text_bounds.w, 41, date_text_bounds.w, date_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentCenter, NULL);

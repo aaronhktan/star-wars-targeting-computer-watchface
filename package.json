@@ -26,9 +26,20 @@
                     "type": "bitmap"
                 },
                 {
-                    "characterRegex": "[-0-9%CHG]",
+                    "file": "images/background.png",
+                    "name": "BACKGROUND_IMAGE",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
+                    "characterRegex": "[0-9:]",
                     "file": "fonts/stencil.ttf",
-                    "name": "FONT_STENCIL_12",
+                    "name": "FONT_STENCIL_30",
                     "targetPlatforms": [
                         "aplite",
                         "basalt",
@@ -50,9 +61,9 @@
                     "type": "font"
                 },
                 {
-                    "characterRegex": "[0-9:]",
+                    "characterRegex": "[-0-9%CHG]",
                     "file": "fonts/stencil.ttf",
-                    "name": "FONT_STENCIL_30",
+                    "name": "FONT_STENCIL_12",
                     "targetPlatforms": [
                         "aplite",
                         "basalt",
@@ -60,17 +71,6 @@
                         "diorite"
                     ],
                     "type": "font"
-                },
-                {
-                    "file": "images/background.png",
-                    "name": "BACKGROUND_IMAGE",
-                    "targetPlatforms": [
-                        "aplite",
-                        "basalt",
-                        "chalk",
-                        "diorite"
-                    ],
-                    "type": "bitmap"
                 }
             ]
         },
