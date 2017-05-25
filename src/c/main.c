@@ -6,8 +6,8 @@ static Window *s_main_window;
 static Layer *s_window_layer, *s_foreground_layer;
 static char s_time_text[6] = "00:00", s_battery_text[5] = "100%", s_date_text[12], s_steps_text[7] = "034617";
 static GFont s_stencil_font_large, s_stencil_font_small, s_stencil_font_tiny;
-static BitmapLayer *s_background_layer;
-static GBitmap *s_background_bitmap;
+static BitmapLayer *s_background_layer, *s_animation_layer;
+static GBitmap *s_background_bitmap, *s_animation_bitmap;
 static bool is_animating = false;
 static int frames_elapsed = 0;
 
@@ -74,85 +74,85 @@ static void battery_handler() {
 static void timer_handler(void * context) {
 	uint32_t frame_delay = frames_elapsed > 22 ? 75 : 100;
 	
-	gbitmap_destroy(s_background_bitmap);
+	gbitmap_destroy(s_animation_bitmap);
 	
 	switch(frames_elapsed) {
 		case 1:
-			s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_FRAME_2);
+			s_animation_bitmap = gbitmap_create_with_resource(RESOURCE_ID_FRAME_2);
 			break;
 		case 2:
-			s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_FRAME_3);
+			s_animation_bitmap = gbitmap_create_with_resource(RESOURCE_ID_FRAME_3);
 			break;
 		case 3:
-			s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_FRAME_4);
+			s_animation_bitmap = gbitmap_create_with_resource(RESOURCE_ID_FRAME_4);
 			break;
 		case 4:
-			s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_FRAME_5);
+			s_animation_bitmap = gbitmap_create_with_resource(RESOURCE_ID_FRAME_5);
 			break;
 		case 5:
-			s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_FRAME_6);
+			s_animation_bitmap = gbitmap_create_with_resource(RESOURCE_ID_FRAME_6);
 			break;
 		case 6:
-			s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_FRAME_7);
+			s_animation_bitmap = gbitmap_create_with_resource(RESOURCE_ID_FRAME_7);
 			break;
 		case 7:
-			s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_FRAME_8);
+			s_animation_bitmap = gbitmap_create_with_resource(RESOURCE_ID_FRAME_8);
 			break;
 		case 8:
-			s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_FRAME_9);
+			s_animation_bitmap = gbitmap_create_with_resource(RESOURCE_ID_FRAME_9);
 			break;
 		case 9:
-			s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_FRAME_10);
+			s_animation_bitmap = gbitmap_create_with_resource(RESOURCE_ID_FRAME_10);
 			break;
 		case 10:
-			s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_FRAME_11);
+			s_animation_bitmap = gbitmap_create_with_resource(RESOURCE_ID_FRAME_11);
 			break;
 		case 11:
-			s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_FRAME_12);
+			s_animation_bitmap = gbitmap_create_with_resource(RESOURCE_ID_FRAME_12);
 			break;
 		case 12:
-			s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_FRAME_13);
+			s_animation_bitmap = gbitmap_create_with_resource(RESOURCE_ID_FRAME_13);
 			break;
 		case 13:
-			s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_FRAME_14);
+			s_animation_bitmap = gbitmap_create_with_resource(RESOURCE_ID_FRAME_14);
 			break;
 		case 14:
-			s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_FRAME_15);
+			s_animation_bitmap = gbitmap_create_with_resource(RESOURCE_ID_FRAME_15);
 			break;
 		case 15:
-			s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_FRAME_16);
+			s_animation_bitmap = gbitmap_create_with_resource(RESOURCE_ID_FRAME_16);
 			break;
 		case 16:
-			s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_FRAME_17);
+			s_animation_bitmap = gbitmap_create_with_resource(RESOURCE_ID_FRAME_17);
 			break;
 		case 17:
-			s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_FRAME_18);
+			s_animation_bitmap = gbitmap_create_with_resource(RESOURCE_ID_FRAME_18);
 			break;
 		case 18:
-			s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_FRAME_19);
+			s_animation_bitmap = gbitmap_create_with_resource(RESOURCE_ID_FRAME_19);
 			break;
 		case 19:
-			s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_FRAME_20);
+			s_animation_bitmap = gbitmap_create_with_resource(RESOURCE_ID_FRAME_20);
 			break;
 		case 20:
-			s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_FRAME_21);
+			s_animation_bitmap = gbitmap_create_with_resource(RESOURCE_ID_FRAME_21);
 			break;
 		case D_MAX_NUM_FRAMES:
-			s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_IMAGE);
+			bitmap_layer_destroy(s_animation_layer);
 			is_animating = false;
 			break;
 		default:
 			if (frames_elapsed % 2 == 0) {
-				s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_FRAME_23);
+				s_animation_bitmap = gbitmap_create_with_resource(RESOURCE_ID_FRAME_23);
 			} else {
-				s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_FRAME_22);
+				s_animation_bitmap = gbitmap_create_with_resource(RESOURCE_ID_FRAME_22);
 			}
 			break;
 	}
 	
-	bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
-	
+	bitmap_layer_set_bitmap(s_animation_layer, s_animation_bitmap);
 	frames_elapsed++;
+	
 	if (frames_elapsed <= D_MAX_NUM_FRAMES) {
 		app_timer_register(frame_delay, timer_handler, NULL);
 	}
@@ -160,12 +160,18 @@ static void timer_handler(void * context) {
 
 static void accel_tap_handler(AccelAxisType axis, int32_t direction) {
 	if (!is_animating) {
-		gbitmap_destroy(s_background_bitmap);
 		is_animating = true;
 		frames_elapsed = 1;
 
-		s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_FRAME_1);
-		bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
+		#if PBL_RECT
+		s_animation_layer = bitmap_layer_create(GRect(5, 64, 134, 83));
+		#else
+		s_animation_layer = bitmap_layer_create(GRect(37, 67, 101, 67));
+		#endif
+		
+		s_animation_bitmap = gbitmap_create_with_resource(RESOURCE_ID_FRAME_1);
+		bitmap_layer_set_bitmap(s_animation_layer, s_animation_bitmap);
+		layer_add_child(bitmap_layer_get_layer(s_background_layer), bitmap_layer_get_layer(s_animation_layer));
 
 		app_timer_register(100, timer_handler, NULL);
 	}
