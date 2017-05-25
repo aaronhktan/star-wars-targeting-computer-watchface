@@ -158,8 +158,8 @@ static void timer_handler(void * context) {
 	}
 }
 
-static void accel_tap_handler(AccelAxisType axis, int32_t direction) {
-	if (!is_animating) {
+static void start_animation() {
+		if (!is_animating) {
 		is_animating = true;
 		frames_elapsed = 1;
 
@@ -175,6 +175,10 @@ static void accel_tap_handler(AccelAxisType axis, int32_t direction) {
 
 		app_timer_register(100, timer_handler, NULL);
 	}
+}
+
+static void accel_tap_handler(AccelAxisType axis, int32_t direction) {
+	start_animation();
 }
 
 #if defined(PBL_HEALTH)
@@ -211,6 +215,7 @@ static void main_window_load(Window *window) {
 	#endif
 	update_time();
 	layer_mark_dirty(s_foreground_layer);
+	start_animation();
 }
 
 static void main_window_unload(Window *window) {
