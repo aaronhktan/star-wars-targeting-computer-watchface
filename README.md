@@ -1,5 +1,6 @@
 # Star Wars Targeting Computer Watchface
 A Star Wars Targeting Computer watchface for Pebble, written in C.
+**Featured on the Pebble App Store!**
 
 ![alt tag](https://github.com/cheeseisdisgusting/star-wars-targeting-computer-watchface/blob/master/screenshots/Banner.png)
 
