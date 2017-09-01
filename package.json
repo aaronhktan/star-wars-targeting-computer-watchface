@@ -35,54 +35,63 @@
                 {
                     "file": "images/disconnected.png",
                     "name": "DISCONNECTED_ICON",
+                    "spaceOptimization": "memory",
                     "targetPlatforms": null,
                     "type": "bitmap"
                 },
                 {
                     "file": "images/night_cloudy.png",
                     "name": "NIGHT_CLOUDY_ICON",
+                    "spaceOptimization": "memory",
                     "targetPlatforms": null,
                     "type": "bitmap"
                 },
                 {
                     "file": "images/night.png",
                     "name": "NIGHT_CLEAR_ICON",
+                    "spaceOptimization": "memory",
                     "targetPlatforms": null,
                     "type": "bitmap"
                 },
                 {
                     "file": "images/snow.png",
                     "name": "SNOW_ICON",
+                    "spaceOptimization": "memory",
                     "targetPlatforms": null,
                     "type": "bitmap"
                 },
                 {
                     "file": "images/thunder.png",
                     "name": "THUNDERSTORM_ICON",
+                    "spaceOptimization": "memory",
                     "targetPlatforms": null,
                     "type": "bitmap"
                 },
                 {
                     "file": "images/rain.png",
                     "name": "RAIN_ICON",
+                    "spaceOptimization": "memory",
                     "targetPlatforms": null,
                     "type": "bitmap"
                 },
                 {
                     "file": "images/cloudy.png",
                     "name": "CLOUDY_ICON",
+                    "spaceOptimization": "memory",
                     "targetPlatforms": null,
                     "type": "bitmap"
                 },
                 {
                     "file": "images/partlysunny.png",
                     "name": "PARTLY_SUNNY_ICON",
+                    "spaceOptimization": "memory",
                     "targetPlatforms": null,
                     "type": "bitmap"
                 },
                 {
                     "file": "images/sunny.png",
                     "name": "SUNNY_ICON",
+                    "spaceOptimization": "memory",
                     "targetPlatforms": null,
                     "type": "bitmap"
                 },
@@ -352,9 +361,9 @@
                     "type": "bitmap"
                 },
                 {
-                    "characterRegex": "[0-9:]",
+                    "characterRegex": "[-0-9%CEFGHR ]",
                     "file": "fonts/stencil.ttf",
-                    "name": "FONT_STENCIL_30",
+                    "name": "FONT_STENCIL_12",
                     "targetPlatforms": [
                         "aplite",
                         "basalt",
@@ -376,9 +385,9 @@
                     "type": "font"
                 },
                 {
-                    "characterRegex": "[-0-9%CEFGHR]",
+                    "characterRegex": "[0-9:]",
                     "file": "fonts/stencil.ttf",
-                    "name": "FONT_STENCIL_12",
+                    "name": "FONT_STENCIL_30",
                     "targetPlatforms": [
                         "aplite",
                         "basalt",

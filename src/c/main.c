@@ -64,6 +64,11 @@ static void draw_weather(int icon) {
 		#endif
 	}
 	layer_add_child(bitmap_layer_get_layer(s_background_layer), bitmap_layer_get_layer(s_weather_layer));
+	
+	if (s_weather_bitmap) {
+		gbitmap_destroy(s_weather_bitmap);
+	}
+	
 	switch (icon) {
 		case 1:
 			s_weather_bitmap = gbitmap_create_with_resource(RESOURCE_ID_SUNNY_ICON);
@@ -90,10 +95,12 @@ static void draw_weather(int icon) {
 			s_weather_bitmap = gbitmap_create_with_resource(RESOURCE_ID_NIGHT_CLOUDY_ICON);
 			break;
 		default:
-			layer_remove_from_parent(bitmap_layer_get_layer(s_weather_layer));
+			s_weather_bitmap = NULL;
 			break;
 	}
-	bitmap_layer_set_bitmap(s_weather_layer, s_weather_bitmap);
+	if (icon != 0) {
+		bitmap_layer_set_bitmap(s_weather_layer, s_weather_bitmap);
+	}
 }
 
 /************************************************************************* Drawing Procedures */
@@ -368,6 +375,8 @@ static void main_window_unload(Window *window) {
 		bitmap_layer_destroy(s_weather_layer);
 	}
 	
+	app_timer_cancel(s_weather_timer);
+	
 	gbitmap_destroy(s_connection_bitmap);
 	bitmap_layer_destroy(s_connection_layer);
 	
@@ -408,13 +417,12 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
 		settings.animate_on_shake = animate_on_shake_tuple->value->int32 == 1;
 		
 		save_settings();
+		
 		if (settings.weather_enabled) {
 			request_weather();
 		} else {
 			snprintf(s_temperature_text, sizeof(s_temperature_text), " ");
-			if (s_weather_layer) {
-				layer_remove_from_parent(bitmap_layer_get_layer(s_weather_layer));
-			}
+			layer_remove_from_parent(bitmap_layer_get_layer(s_weather_layer));
 		}
 		
 		if (settings.animate_on_shake) {
