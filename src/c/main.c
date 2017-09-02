@@ -133,6 +133,13 @@ static void foreground_update_proc(Layer *s_foreground_layer, GContext *ctx) {
 	
 	GSize battery_text_bounds = graphics_text_layout_get_content_size(s_battery_text, s_stencil_font_tiny, GRect(0, 0, bounds.size.w, bounds.size.h), GTextOverflowModeWordWrap, GTextAlignmentRight);
 	graphics_draw_text(ctx, s_battery_text, s_stencil_font_tiny, GRect(90 - battery_text_bounds.w, 8, battery_text_bounds.w, battery_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentRight, NULL);	
+	
+	if (settings.weather_enabled)
+		graphics_context_set_fill_color(ctx, GColorRed);
+		graphics_fill_rect(ctx, GRect(142, 74, 26, 25), 3, GCornersAll);
+		GSize temperature_text_bounds = graphics_text_layout_get_content_size(s_temperature_text, s_stencil_font_tiny, GRect(0, 0, bounds.size.w, bounds.size.h), GTextOverflowModeWordWrap, GTextAlignmentCenter);
+		graphics_context_set_text_color(ctx, GColorBlack);
+		graphics_draw_text(ctx, s_temperature_text, s_stencil_font_tiny, GRect(142 + 13 - 0.5 * temperature_text_bounds.w, 74 + 10 - 0.5 * temperature_text_bounds.h, temperature_text_bounds.w, temperature_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentCenter, NULL);
 	#endif
 	
 	graphics_context_set_text_color(ctx, PBL_IF_COLOR_ELSE(GColorOrange, GColorWhite));

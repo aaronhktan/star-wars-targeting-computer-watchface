@@ -14,6 +14,18 @@ var xhrRequest = function(url, type, callback) {
 };
 
 function sendWeather(temperature, conditions) {
+	
+	if (Pebble.getActiveWatchInfo().platform != "chalk") {
+		switch(temperatureUnit) {
+			case 1:
+				temperature += "F";
+				break;
+			default:
+				temperature += "C";
+				break;
+		}
+	}
+	
 	var dictionary = {
 		'temperature': String(temperature),
 		'conditions': parseInt(conditions)
@@ -35,9 +47,9 @@ function getOWMWeather(position) {
 									var json = JSON.parse(responseText);
 									
 									// Get temperature
-									temperature = String(Math.round(json.main.temp - 273.15)) + "C";
+									temperature = String(Math.round(json.main.temp - 273.15));
 									if (temperatureUnit == "1") {
-										temperature = String(Math.round((json.main.temp - 273.15) * 9 / 5) + 32) + "F";
+										temperature = String(Math.round((json.main.temp - 273.15) * 9 / 5) + 32);
 									}
 									
 									// Get icon
@@ -79,11 +91,13 @@ function getWUWeather(position) {
 							 function(responseText) {
 								 try {
 									 var json = JSON.parse(responseText);
+									 
 									 if (temperatureUnit == "1") {
-										 temperature = String(Math.round(json.current_observation.temp_f)) + "F";
+										 temperature = String(Math.round(json.current_observation.temp_f));
 									 } else {
-										 temperature = String(Math.round(json.current_observation.temp_c)) + "C";
+										 temperature = String(Math.round(json.current_observation.temp_c));
 									 }
+									 
 									 var icon = json.current_observation.icon_url.split("/").slice(-1)[0];
 									 if (icon == "clear.gif" || icon == "sunny.gif" || icon == "hazy.gif") {
 										 conditions = 1;
@@ -120,12 +134,14 @@ function getDSWeather(position) {
 		xhrRequest(url, 'GET',
 							 function(responseText) {
 								 try {
+									 
 									 var json = JSON.parse(responseText);
 									 if (temperatureUnit == "1") {
-										 temperature = String(Math.round(json.currently.temperature)) + "F";
+										 temperature = String(Math.round(json.currently.temperature));
 									 } else {
-										 temperature = String(Math.round((json.currently.temperature - 32) * 5 / 9)) + "C";
+										 temperature = String(Math.round((json.currently.temperature - 32) * 5 / 9));
 									 }
+									 
 									 var icon = json.currently.icon;
 									 if (icon == "clear-day") {
 										 conditions = 1;
