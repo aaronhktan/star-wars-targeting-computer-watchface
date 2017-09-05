@@ -15,7 +15,7 @@ var xhrRequest = function(url, type, callback) {
 
 function sendWeather(temperature, conditions) {
 	
-	if (Pebble.getActiveWatchInfo().platform != "chalk") {
+	if ((Pebble.getActiveWatchInfo().platform != "chalk") && temperature != "ERR") {
 		switch(temperatureUnit) {
 			case 1:
 				temperature += "F";

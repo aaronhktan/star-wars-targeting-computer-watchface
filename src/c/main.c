@@ -95,7 +95,7 @@ static void draw_weather(int icon) {
 			s_weather_bitmap = gbitmap_create_with_resource(RESOURCE_ID_NIGHT_CLOUDY_ICON);
 			break;
 		default:
-			s_weather_bitmap = NULL;
+			layer_remove_from_parent(bitmap_layer_get_layer(s_weather_layer));
 			break;
 	}
 	if (icon != 0) {
