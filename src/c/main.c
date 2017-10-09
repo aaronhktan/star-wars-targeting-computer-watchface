@@ -56,15 +56,6 @@ static void request_weather() {
 }
 
 static void draw_weather(int icon) {
-	if (!s_weather_layer) {
-		#if PBL_RECT
-		s_weather_layer = bitmap_layer_create(GRect(6, 2, 37, 38));
-		#else
-		s_weather_layer = bitmap_layer_create(GRect(142, 104, 26, 25));
-		#endif
-	}
-	layer_add_child(bitmap_layer_get_layer(s_background_layer), bitmap_layer_get_layer(s_weather_layer));
-	
 	if (s_weather_bitmap) {
 		gbitmap_destroy(s_weather_bitmap);
 	}
@@ -95,7 +86,6 @@ static void draw_weather(int icon) {
 			s_weather_bitmap = gbitmap_create_with_resource(RESOURCE_ID_NIGHT_CLOUDY_ICON);
 			break;
 		default:
-			layer_remove_from_parent(bitmap_layer_get_layer(s_weather_layer));
 			break;
 	}
 	if (icon != 0) {
@@ -351,6 +341,16 @@ static void initialize_ui() {
 	s_foreground_layer = layer_create(bounds);
 	layer_set_update_proc(s_foreground_layer, foreground_update_proc);
 	layer_add_child(window_get_root_layer(s_main_window), s_foreground_layer);
+	
+	#if PBL_RECT
+	s_weather_layer = bitmap_layer_create(GRect(6, 2, 37, 38));
+	#else
+	s_weather_layer = bitmap_layer_create(GRect(142, 104, 26, 25));
+	#endif
+	if (settings.weather_enabled) {
+		s_weather_timer = app_timer_register(30 * 100 * SECONDS_PER_MINUTE, request_weather, NULL);
+		layer_add_child(bitmap_layer_get_layer(s_background_layer), bitmap_layer_get_layer(s_weather_layer));
+	}
 }
 
 static void main_window_load(Window *window) {
@@ -427,6 +427,7 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
 		
 		if (settings.weather_enabled) {
 			request_weather();
+			layer_add_child(bitmap_layer_get_layer(s_background_layer), bitmap_layer_get_layer(s_weather_layer));
 		} else {
 			snprintf(s_temperature_text, sizeof(s_temperature_text), " ");
 			layer_remove_from_parent(bitmap_layer_get_layer(s_weather_layer));
@@ -486,8 +487,6 @@ static void init() {
 	#endif
 	
 	window_stack_push(s_main_window, true);
-	
-	s_weather_timer = app_timer_register(30 * 100 * SECONDS_PER_MINUTE, request_weather, NULL);
 }
 
 static void deinit() {

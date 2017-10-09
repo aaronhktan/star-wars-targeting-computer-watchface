@@ -56,7 +56,7 @@ function getOWMWeather(position) {
 									var icon = json.weather[0].icon;
 									if (icon == "01d") {
 										conditions = 1;
-									} else if (icon == "02d") {
+									} else if (icon == "02d" || icon == "50d") {
 										conditions = 2;
 									} else if (icon == "03d" || icon == "04d" || icon == "03n" || icon == "04n") {
 										conditions = 3;
@@ -68,7 +68,7 @@ function getOWMWeather(position) {
 										conditions = 6;
 									} else if (icon == "01n") {
 										conditions = 7;
-									} else if (icon == "02n") {
+									} else if (icon == "02n" || icon == "50n") {
 										conditions = 8;
 									} else {
 										conditions = 0;
@@ -198,7 +198,7 @@ exports.getWeather = function() {
 		if (settings.weatherEnabled === true) {
 			navigator.geolocation.getCurrentPosition(locationSuccess, locationError, {timeout: 15000, maximumAge: 60000});
 			owmKey = (settings.owmKey === "") ? keys.owmKey : settings.owmKey;
-			temperatureUnit = settings.temperatureUnit;
+			temperatureUnit = parseInt(settings.temperatureUnit);
 		}
 	} else {
 		navigator.geolocation.getCurrentPosition(locationSuccess, locationError, {timeout: 15000, maximumAge: 60000});
