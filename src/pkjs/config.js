@@ -5,7 +5,7 @@ module.exports = [
 	},
 	{
 		"type": "text",
-		"defaultValue": "This is the settings page for the Star Wars Targeting Computer watchface. You are running version 1.5.",
+		"defaultValue": "This is the settings page for the Star Wars Targeting Computer watchface. You are running version 1.6.",
 	},
 	{
 		"type": "section",

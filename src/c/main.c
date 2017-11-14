@@ -86,11 +86,10 @@ static void draw_weather(int icon) {
 			s_weather_bitmap = gbitmap_create_with_resource(RESOURCE_ID_NIGHT_CLOUDY_ICON);
 			break;
 		default:
+			s_weather_bitmap = gbitmap_create_with_resource(RESOURCE_ID_ERROR_ICON);
 			break;
 	}
-	if (icon != 0) {
-		bitmap_layer_set_bitmap(s_weather_layer, s_weather_bitmap);
-	}
+	bitmap_layer_set_bitmap(s_weather_layer, s_weather_bitmap);
 }
 
 /************************************************************************* Drawing Procedures */

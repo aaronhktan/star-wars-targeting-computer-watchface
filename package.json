@@ -33,6 +33,17 @@
         "resources": {
             "media": [
                 {
+                    "file": "images/error.png",
+                    "name": "ERROR_ICON",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
                     "file": "images/disconnected.png",
                     "name": "DISCONNECTED_ICON",
                     "spaceOptimization": "memory",
@@ -430,5 +441,5 @@
             "watchface": true
         }
     },
-    "version": "1.5.0"
+    "version": "1.6.0"
 }
