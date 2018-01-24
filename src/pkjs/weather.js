@@ -196,9 +196,18 @@ exports.getWeather = function() {
 	if (localStorage.getItem('clay-settings') !== null) {
 		settings = JSON.parse(localStorage.getItem('clay-settings'));
 		if (settings.weatherEnabled === true) {
-			navigator.geolocation.getCurrentPosition(locationSuccess, locationError, {timeout: 15000, maximumAge: 60000});
 			owmKey = (settings.owmKey === "") ? keys.owmKey : settings.owmKey;
 			temperatureUnit = parseInt(settings.temperatureUnit);
+			if (settings.defaultEnabled === true) {
+				locationSuccess({
+					"coords": {
+						"latitude": settings.defaultLat,
+						"longitude": settings.defaultLong
+					},
+				});
+			} else {
+				navigator.geolocation.getCurrentPosition(locationSuccess, locationError, {timeout: 15000, maximumAge: 60000});
+			}
 		}
 	} else {
 		navigator.geolocation.getCurrentPosition(locationSuccess, locationError, {timeout: 15000, maximumAge: 60000});

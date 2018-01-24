@@ -455,7 +455,7 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
 
 static void init() {
 	app_message_register_inbox_received(inbox_received_callback);
-	app_message_open(256, 128);
+	app_message_open(512, 128);
 	
 	settings_init();
 	

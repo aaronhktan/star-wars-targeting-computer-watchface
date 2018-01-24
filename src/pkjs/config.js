@@ -5,7 +5,7 @@ module.exports = [
 	},
 	{
 		"type": "text",
-		"defaultValue": "This is the settings page for the Star Wars Targeting Computer watchface. You are running version 1.6.",
+		"defaultValue": "This is the settings page for the Star Wars Targeting Computer watchface. You are running version 1.7.",
 	},
 	{
 		"type": "section",
@@ -100,6 +100,48 @@ module.exports = [
 						"value": "1"
 					}
 				]
+			},
+			{
+				"type": "toggle",
+				"messageKey": "defaultEnabled",
+				"defaultValue": false,
+				"description": "If you don't have location services enabled, you can set a default address for which weather should be fetched.",
+				"label": "Use set location for weather",
+			},
+			{
+				"type": "input",
+				"messageKey": "defaultLocation",
+				"label": "Default address",
+				"attributes": {
+					"placeholder": "e.g. Ottawa, Canada",
+				},
+				"enable": false,
+			},
+			{
+				"type": "button",
+				"primary": false,
+				"defaultValue": "Translate to lat/long",
+				"description": "You must click on this button before saving settings to get latitude and longitude.",
+				"id": "getLatLongButton",
+				"enable": false,
+			},
+			{
+				"type": "input",
+				"messageKey": "defaultLat",
+				"label": "Latitude",
+				"attributes": {
+					"placeholder": "Your latitude will appear here"
+				},
+				"enable": false,
+			},
+			{
+				"type": "input",
+				"messageKey": "defaultLong",
+				"label": "Longitude",
+				"attributes": {
+					"placeholder": "Your longitude will appear here"
+				},
+				"enable": false,
 			},
 		]
 	},
