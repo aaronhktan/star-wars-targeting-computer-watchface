@@ -117,32 +117,6 @@ module.exports = [
 				},
 				"enable": false,
 			},
-			{
-				"type": "button",
-				"primary": false,
-				"defaultValue": "Translate to lat/long",
-				"description": "You must click on this button before saving settings to get latitude and longitude.",
-				"id": "getLatLongButton",
-				"enable": false,
-			},
-			{
-				"type": "input",
-				"messageKey": "defaultLat",
-				"label": "Latitude",
-				"attributes": {
-					"placeholder": "Your latitude will appear here"
-				},
-				"enable": false,
-			},
-			{
-				"type": "input",
-				"messageKey": "defaultLong",
-				"label": "Longitude",
-				"attributes": {
-					"placeholder": "Your longitude will appear here"
-				},
-				"enable": false,
-			},
 		]
 	},
 	{

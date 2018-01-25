@@ -28,8 +28,6 @@
             "pmEmail",
             "pmPIN",
             "animateOnShake",
-            "defaultLat",
-            "defaultLong",
             "defaultLocation",
             "defaultEnabled"
         ],

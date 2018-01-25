@@ -31,31 +31,6 @@ module.exports = function(minified) {
 		});
 	}
 	
-	function importLatLong() {
-		this.set('Getting coordinates...');
-		
-		var address = clayConfig.getItemByMessageKey('defaultLocation').get();
-		
-		$.request('get', 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=' + "YOUR_KEY_HERE")
-		.then(function(responseText) {
-			var json = JSON.parse(responseText);
-			if (json.status == 'OK') {
-				if (json.results[0].geometry.location.lat) {
-					clayConfig.getItemByMessageKey('defaultLat').set(json.results[0].geometry.location.lat);
-				}
-				if (json.results[0].geometry.location.lng) {
-					clayConfig.getItemByMessageKey('defaultLong').set(json.results[0].geometry.location.lng);
-				}
-				clayConfig.getItemById('getLatLongButton').set('Translate to lat/long');
-			} else {
-				clayConfig.getItemById('getLatLongButton').set('Error!');
-			}
-		})
-		.error(function(status, statusText, responseText) {
-			clayConfig.getItemById('getLatLongButton').set('Error!');
-		});
-	}
-	
 	function toggleWeather() { // Enable or disable changing settings based on whether weather is enabled
 		if (this.get() !== false) {
 			clayConfig.getItemByMessageKey('weatherProvider').enable();
@@ -63,32 +38,20 @@ module.exports = function(minified) {
 			clayConfig.getItemByMessageKey('defaultEnabled').enable();
 			if (clayConfig.getItemByMessageKey('defaultEnabled').get() === true) {
 				clayConfig.getItemByMessageKey('defaultLocation').enable();
-				clayConfig.getItemByMessageKey('defaultLat').enable();
-				clayConfig.getItemByMessageKey('defaultLong').enable();
-				clayConfig.getItemById('getLatLongButton').enable();
 			}
 		} else {
 			clayConfig.getItemByMessageKey('weatherProvider').disable();
 			clayConfig.getItemByMessageKey('temperatureUnit').disable();
 			clayConfig.getItemByMessageKey('defaultEnabled').disable();
 			clayConfig.getItemByMessageKey('defaultLocation').disable();
-			clayConfig.getItemByMessageKey('defaultLat').disable();
-			clayConfig.getItemByMessageKey('defaultLong').disable();
-			clayConfig.getItemById('getLatLongButton').disable();
 		}
 	}
 	
 	function toggleLocation() {
 		if (this.get() !== false) {
 			clayConfig.getItemByMessageKey('defaultLocation').enable();
-			clayConfig.getItemByMessageKey('defaultLat').enable();
-			clayConfig.getItemByMessageKey('defaultLong').enable();
-			clayConfig.getItemById('getLatLongButton').enable();
 		} else {
 			clayConfig.getItemByMessageKey('defaultLocation').disable();
-			clayConfig.getItemByMessageKey('defaultLat').disable();
-			clayConfig.getItemByMessageKey('defaultLong').disable();
-			clayConfig.getItemById('getLatLongButton').disable();
 		}
 	}
 	
@@ -103,9 +66,6 @@ module.exports = function(minified) {
 		var locationToggle = clayConfig.getItemByMessageKey('defaultEnabled');
 		toggleLocation.call(locationToggle);
 		locationToggle.on('click', toggleLocation);
-		
-		var getLatLongButton = clayConfig.getItemById('getLatLongButton');
-		getLatLongButton.on('click', importLatLong);
 	});
 	
 };
