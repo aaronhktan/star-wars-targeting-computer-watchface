@@ -99,7 +99,7 @@ static void foreground_update_proc(Layer *s_foreground_layer, GContext *ctx) {
   
   graphics_context_set_text_color(ctx, PBL_IF_COLOR_ELSE(GColorWhite, GColorBlack));
   
-  #if PBL_RECT
+#if PBL_RECT
   GSize time_text_bounds = graphics_text_layout_get_content_size(s_time_text, s_stencil_font_large, GRect(0, 0, bounds.size.w, bounds.size.h), GTextOverflowModeWordWrap, GTextAlignmentCenter);
   graphics_draw_text(ctx, s_time_text, s_stencil_font_large, GRect(92 - 0.5 * time_text_bounds.w, 10, time_text_bounds.w, time_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentCenter, NULL);
 
@@ -113,7 +113,7 @@ static void foreground_update_proc(Layer *s_foreground_layer, GContext *ctx) {
     GSize temperature_text_bounds = graphics_text_layout_get_content_size(s_temperature_text, s_stencil_font_tiny, GRect(0, 0, bounds.size.w, bounds.size.h), GTextOverflowModeWordWrap, GTextAlignmentLeft);
     graphics_draw_text(ctx, s_temperature_text, s_stencil_font_tiny, GRect(55, 2, temperature_text_bounds.w, temperature_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentRight, NULL);
   }
-  #else
+#else
   GSize time_text_bounds = graphics_text_layout_get_content_size(s_time_text, s_stencil_font_large, GRect(0, 0, bounds.size.w, bounds.size.h), GTextOverflowModeWordWrap, GTextAlignmentCenter);
   graphics_draw_text(ctx, s_time_text, s_stencil_font_large, GRect(90 - 0.5 * time_text_bounds.w, 17, time_text_bounds.w, time_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentCenter, NULL);
 
@@ -129,17 +129,17 @@ static void foreground_update_proc(Layer *s_foreground_layer, GContext *ctx) {
     GSize temperature_text_bounds = graphics_text_layout_get_content_size(s_temperature_text, s_stencil_font_tiny, GRect(0, 0, bounds.size.w, bounds.size.h), GTextOverflowModeWordWrap, GTextAlignmentCenter);
     graphics_context_set_text_color(ctx, GColorBlack);
     graphics_draw_text(ctx, s_temperature_text, s_stencil_font_tiny, GRect(142 + 13 - 0.5 * temperature_text_bounds.w, 74 + 10 - 0.5 * temperature_text_bounds.h, temperature_text_bounds.w, temperature_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentCenter, NULL);
-  #endif
+#endif
   
   graphics_context_set_text_color(ctx, PBL_IF_COLOR_ELSE(GColorOrange, GColorWhite));
   
-  #if PBL_RECT
+#if PBL_RECT
   GSize step_text_bounds = graphics_text_layout_get_content_size(s_steps_text, s_stencil_font_small, GRect(0, 0, bounds.size.w, bounds.size.h), GTextOverflowModeWordWrap, GTextAlignmentCenter);
   graphics_draw_text(ctx, s_steps_text, s_stencil_font_small, GRect(72 - 0.5 * step_text_bounds.w, 147, step_text_bounds.w, step_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentCenter, NULL);
-  #else
+#else
   GSize step_text_bounds = graphics_text_layout_get_content_size(s_steps_text, s_stencil_font_small, GRect(0, 0, bounds.size.w, bounds.size.h), GTextOverflowModeWordWrap, GTextAlignmentCenter);
   graphics_draw_text(ctx, s_steps_text, s_stencil_font_small, GRect(90 - 0.5 * step_text_bounds.w, 138, step_text_bounds.w, step_text_bounds.h), GTextOverflowModeWordWrap, GTextAlignmentCenter, NULL);
-  #endif
+#endif
 }
 
 /************************************************************************* Time Updaters */
@@ -269,11 +269,11 @@ static void start_animation() {
     is_animating = true;
     frames_elapsed = 1;
 
-    #if PBL_RECT
+#if PBL_RECT
     s_animation_layer = bitmap_layer_create(GRect(5, 64, 134, 83));
-    #else
+#else
     s_animation_layer = bitmap_layer_create(GRect(39, 67, 101, 67));
-    #endif
+#endif
     
     s_animation_bitmap = gbitmap_create_with_resource(RESOURCE_ID_FRAME_1);
     bitmap_layer_set_bitmap(s_animation_layer, s_animation_bitmap);
@@ -296,11 +296,11 @@ static void bluetooth_callback(bool connected) {
     if (settings.vibrate_on_disconnect) {
       vibes_long_pulse();
     }
-    #if PBL_RECT
+#if PBL_RECT
     s_connection_layer = bitmap_layer_create(GRect(6, 47, 37, 11));
-    #else
+#else
     s_connection_layer = bitmap_layer_create(GRect(63, 164, 55, 6));
-    #endif
+#endif
     s_connection_bitmap = gbitmap_create_with_resource(RESOURCE_ID_DISCONNECTED_ICON);
     bitmap_layer_set_bitmap(s_connection_layer, s_connection_bitmap);
     layer_add_child(bitmap_layer_get_layer(s_background_layer), bitmap_layer_get_layer(s_connection_layer));
@@ -341,11 +341,11 @@ static void initialize_ui() {
   layer_set_update_proc(s_foreground_layer, foreground_update_proc);
   layer_add_child(window_get_root_layer(s_main_window), s_foreground_layer);
   
-  #if PBL_RECT
+#if PBL_RECT
   s_weather_layer = bitmap_layer_create(GRect(6, 2, 37, 38));
-  #else
+#else
   s_weather_layer = bitmap_layer_create(GRect(142, 104, 26, 25));
-  #endif
+#endif
   if (settings.weather_enabled) {
     s_weather_timer = app_timer_register(30 * 100 * SECONDS_PER_MINUTE, request_weather, NULL);
     layer_add_child(bitmap_layer_get_layer(s_background_layer), bitmap_layer_get_layer(s_weather_layer));
@@ -358,11 +358,11 @@ static void main_window_load(Window *window) {
   update_time();
   battery_handler();
   bluetooth_init();
-  #if defined(PBL_HEALTH)
+#if defined(PBL_HEALTH)
   if (settings.health_enabled) {
     update_step_count();
   }
-  #endif
+#endif
   layer_mark_dirty(s_foreground_layer);
   start_animation();
 }
@@ -393,9 +393,9 @@ static void main_window_unload(Window *window) {
   
   tick_timer_service_unsubscribe();
   battery_state_service_unsubscribe();
-  #if defined(PBL_HEALTH)
+#if defined(PBL_HEALTH)
   health_service_events_unsubscribe();
-  #endif
+#endif
   accel_tap_service_unsubscribe();
 }
 
@@ -438,14 +438,14 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
       accel_tap_service_unsubscribe();
     }
     
-    #if defined(PBL_HEALTH)
+#if defined(PBL_HEALTH)
     if (settings.health_enabled) {
       health_service_events_subscribe(health_handler, NULL);
     } else {
       health_service_events_unsubscribe();
       snprintf(s_steps_text, sizeof(s_steps_text), "034617");
     }
-    #endif
+#endif
     
     layer_mark_dirty(s_foreground_layer);
   }
@@ -479,11 +479,11 @@ static void init() {
   connection_service_subscribe((ConnectionHandlers) {
     .pebble_app_connection_handler = bluetooth_callback
   });
-  #if defined(PBL_HEALTH)
+#if defined(PBL_HEALTH)
   if (settings.health_enabled) {
     health_service_events_subscribe(health_handler, NULL);
   }
-  #endif
+#endif
   
   window_stack_push(s_main_window, true);
 }

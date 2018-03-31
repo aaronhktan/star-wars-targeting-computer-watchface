@@ -1,0 +1,13 @@
+# Ignore build
+build/*
+.lock-waf_darwin_build
+
+# Ignore Node things
+node_modules/*
+package-lock.json
+
+# Ignore Mac things
+*.DS_Store
+
+# Ignore keys
+*keys.js

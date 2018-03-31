@@ -1,7 +1,7 @@
 {
     "author": "cheeseisdisgusting@gmail.com",
     "dependencies": {
-        "pebble-clay": "^1.0.0"
+        "pebble-clay": "^1.0.4"
     },
     "keywords": [],
     "name": "star-wars-targeting-computer",
@@ -443,5 +443,5 @@
             "watchface": true
         }
     },
-    "version": "1.7.0"
+    "version": "1.8.0"
 }

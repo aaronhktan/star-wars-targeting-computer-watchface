@@ -192,45 +192,67 @@ function locationError(error) {
 }
 
 exports.getWeather = function() {
-  if (localStorage.getItem('clay-settings') !== null) {
-    settings = JSON.parse(localStorage.getItem('clay-settings'));
-    if (settings.weatherEnabled === true) {
-      owmKey = (settings.owmKey === '') ? keys.owmKey : settings.owmKey;
-      temperatureUnit = parseInt(settings.temperatureUnit);
-      if (settings.defaultEnabled === true) {
-        try {
-          var url = encodeURI('https://maps.googleapis.com/maps/api/geocode/json?address=' + settings.defaultLocation + '&key=' + keys.mapsKey);
-          xhrRequest(url, 'GET', function(responseText) {
-            var json = JSON.parse(responseText);
-            if (json.status == 'OK') {
-              var lat = '';
-              var long = '';
-              if (json.results[0].geometry.location.lat) {
-                lat = json.results[0].geometry.location.lat;
-              }
-              if (json.results[0].geometry.location.lng) {
-                long = json.results[0].geometry.location.lng;
-              }
-              locationSuccess({
-                'coords': {
-                  'latitude': lat,
-                  'longitude': long
-                },
-              });
-            } else {
-              sendWeather('ERR', 0);
-            }
-          });
-        } catch (e) {
-          sendWeather('ERR', 0);
-        }
-      } else {
-        navigator.geolocation.getCurrentPosition(locationSuccess, locationError, {timeout: 15000, maximumAge: 60000});
-      }
-    }
-  } else {
+  console.log('Getting weather...');
+  if (localStorage.getItem('clay-settings') === null) {
     navigator.geolocation.getCurrentPosition(locationSuccess, locationError, {timeout: 15000, maximumAge: 60000});
     owmKey = keys.owmKey;
     temperatureUnit = 0;
+    return;
+  }
+
+  settings = JSON.parse(localStorage.getItem('clay-settings'));
+  if (settings.weatherEnabled === true) {
+    owmKey = (settings.owmKey === '') ? keys.owmKey : settings.owmKey;
+    temperatureUnit = parseInt(settings.temperatureUnit);
+
+    if (settings.defaultEnabled === false) {
+      navigator.geolocation.getCurrentPosition(locationSuccess, locationError, {timeout: 15000, maximumAge: 60000});
+      return;
+    }
+
+    try {
+      var previousLocation = localStorage.getItem('previousLocation');
+      var lat = localStorage.getItem('lat');
+      var long = localStorage.getItem('long');
+      console.log(previousLocation != settings.defaultLocation);
+      if (lat === null || long === null || previousLocation == null || previousLocation != settings.defaultLocation) {
+        var url = encodeURI('https://maps.googleapis.com/maps/api/geocode/json?address=' + settings.defaultLocation + '&key=' + keys.mapsKey);
+        xhrRequest(url, 'GET', function(responseText) {
+          var json = JSON.parse(responseText);
+
+          if (json.status !== 'OK') {
+            console.log('Status is not OK');
+            sendWeather('ERR', 0);
+            return;
+          }
+
+          if (json.results[0].geometry.location.lat) {
+            lat = json.results[0].geometry.location.lat;
+            localStorage.setItem('lat', lat);
+          }
+          if (json.results[0].geometry.location.lng) {
+            long = json.results[0].geometry.location.lng;
+            localStorage.setItem('long', long);
+          }
+          localStorage.setItem('previousLocation', settings.defaultLocation);
+          locationSuccess({
+            'coords': {
+              'latitude': lat,
+              'longitude': long
+            },
+          });
+        });
+      } else {
+        locationSuccess({
+          'coords': {
+            'latitude': lat,
+            'longitude': long
+          },
+        });
+      }
+    } catch (e) {
+      console.log(e);
+      sendWeather('ERR', 0);
+    }
   }
 };
